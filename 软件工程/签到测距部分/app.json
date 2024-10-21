@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/register/userlogin",
+    "pages/register/register",
+    "pages/my/myinfo",
+    "pages/my/change",
+    "pages/answer/answer_chapter/chapter",
+    "pages/answer/answer_classify/classify",
+    "pages/answer/answer_info/info",
+    "pages/signin/signin"
+  ], 
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页面",
+        "iconPath": "images/tab_account1.png",
+        "selectedIconPath": "images/tab_account2.png"
+      },
+      {
+        "pagePath": "pages/signin/signin",
+        "text": "签到",
+        "iconPath": "images/signin2.png",
+        "selectedIconPath": "images/signin1.png"
+      },
+      {
+        "pagePath": "pages/my/myinfo",
+        "text": "我的",
+        "iconPath": "images/tab_course1.png",
+        "selectedIconPath": "images/tab_course2.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于学习在线签到功能" 
+    }
+  }
+}
