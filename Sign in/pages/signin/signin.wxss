@@ -1,9 +1,0 @@
-/* pages/signin/signin.wxss */
-.motto {
-    margin-top: 150px;
-    text-align: center
-}
-
-.weui-btn {
-    margin-top: 20px;
-}
