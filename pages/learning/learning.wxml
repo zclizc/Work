@@ -1,14 +1,103 @@
 <view class="container">
-  <view class="question-list">
-    <block wx:for="{{questions}}" wx:key="index">
-      <view class="question-item" bindtap="selectQuestion" data-index="{{index}}">
-        <text>{{item.content}}</text> <!-- 假设题目内容在 content 字段 -->
+  <!-- 题目筛选区域：只在未开始测试且未显示结果时显示 -->
+  <block wx:if="{{!currentQuestion && !showResult}}">
+    <view class="filter-section">
+      <!-- 题目类型选择 -->
+      <view class="filter-item">
+        <text class="section-title">选择科目</text>
+        <checkbox-group bindchange="handleTypeChange">
+          <view class="type-item" wx:for="{{questionTypes}}" wx:key="*this">
+            <checkbox value="{{item}}">{{item}}</checkbox>
+          </view>
+        </checkbox-group>
       </view>
-    </block>
+
+      <!-- 难度选择 -->
+      <view class="filter-item">
+        <text class="section-title">选择难度</text>
+        <radio-group bindchange="handleDifficultyChange">
+          <view class="difficulty-item" wx:for="{{difficultyLevels}}" wx:key="value">
+            <radio value="{{item.value}}">{{item.label}}</radio>
+          </view>
+        </radio-group>
+      </view>
+
+      <!-- 题目数量选择 -->
+      <view class="filter-item">
+        <text class="section-title">选择题目数量（{{questionCount}}题）</text>
+        <slider min="5" max="20" value="{{questionCount}}" show-value bindchange="handleCountChange"/>
+      </view>
+    </view>
+
+    <!-- 开始测试按钮 -->
+    <view class="button-group">
+      <button class="btn" type="primary" bindtap="startTest">开始测试</button>
+    </view>
+  </block>
+
+  <!-- 在合适的位置添加这个按钮
+  <button 
+  class="btn" 
+  type="primary" 
+  bindtap="addTestQuestions"
+  style="margin: 20px; background-color: #07c160;">
+  添加测试题目
+  </button> -->
+
+<!-- 测试区域 -->
+<block wx:if="{{currentQuestion}}">
+  <!-- 进度条 -->
+  <view class="progress-container">
+    <progress 
+      percent="{{progressPercent}}" 
+      stroke-width="3" 
+      color="#07c160" 
+      active="true"
+      active-mode="forwards"
+    />
+    <view class="progress-text">已完成 {{currentIndex + 1}}/{{questions.length}} 题</view>
   </view>
 
-  <view class="current-question" wx:if="{{currentQuestion}}">
-    <text>当前题目: {{currentQuestion.content}}</text>
-    <button bindtap="addWrongQuestion">收藏错题</button>
+  <view class="question-card">
+    <!-- 原有的题目内容 -->
+    <view class="question-info">
+      <text>第 {{currentIndex + 1}}/{{questions.length}} 题</text>
+      <text>{{currentQuestion.type}}</text>
+      <text>{{currentQuestion.difficulty}}</text>
+    </view>
+      <view class="question-content">{{currentQuestion.content}}</view>
+      <view class="options">
+        <view 
+          wx:for="{{currentQuestion.options}}" 
+          wx:key="*this"
+          class="option {{selectedAnswer === index ? 'selected' : ''}} {{showAnswer && index === currentQuestion.correctAnswer ? 'correct' : ''}} {{showAnswer && selectedAnswer === index && selectedAnswer !== currentQuestion.correctAnswer ? 'wrong' : ''}}"
+          bindtap="selectAnswer"
+          data-index="{{index}}"
+        >
+          {{item}}
+        </view>
+      </view>
+      <view class="explanation" wx:if="{{showAnswer}}">
+        <text>解释：{{currentQuestion.explanation}}</text>
+      </view>
+    </view>
+
+    <view class="button-group">
+      <button wx:if="{{showAnswer}}" class="btn" type="primary" bindtap="nextQuestion">
+        {{currentIndex === questions.length - 1 ? '完成测试' : '下一题'}}
+      </button>
+      <button wx:else class="btn" type="primary" bindtap="submitAnswer">提交答案</button>
+    </view>
+  </block>
+
+  <!-- 测试结果 -->
+  <view class="result" wx:if="{{showResult}}">
+    <view class="result-title">测试完成</view>
+    <view class="result-content">
+      <view>总题数：{{questions.length}}</view>
+      <view>正确题数：{{correctCount}}</view>
+      <view>正确率：{{correctRate}}%</view>
+    </view>
+    <button class="btn" type="primary" bindtap="restartTest">重新测试</button>
   </view>
 </view>
