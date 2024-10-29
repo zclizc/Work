@@ -1,34 +1,45 @@
-/** signIn.wxss **/
-
+/* pages/signin/signin.wxss */
 .container {
+  padding: 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.weui-btn_primary {
+  display: flex;
   justify-content: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-}
-
-.title {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.info {
-  margin: 10px 0;
-}
-
-.button {
+  align-items: center;
+  background-color: #2d8cf0;
+  color: #fff;
+  border-radius: 4px;
   margin-top: 20px;
-  width: 80%;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #007aff;
-  color: white;
-  font-size: 16px;
+  text-align: center;
 }
 
-.status {
-  margin-top: 15px;
-  color: green;
+.choose-location-btn,
+.get-location-btn,
+.sign-in-btn {
+  width: 80%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
+
+.motto {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: center;
+  color: #333;
+}
+
+.result-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  color: #333;
+  z-index: 1000; /* 确保提示信息在所有元素之上 */
 }

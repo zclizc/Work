@@ -1,7 +1,23 @@
+<!-- pages/signin/signin.wxml -->
 <view class="container">
-  <text class="title">签到</text>
-  <text class="info">当前距离目标位置: {{distance ? distance.toFixed(2) : '获取中...'}} 米</text>
-  <button class="button" bindtap="chooseTargetLocation">选择目标位置</button>
-  <button class="button" bindtap="handleSignIn" disabled="{{isSignedIn}}">签到</button>
-  <text class="status" hidden="{{!isSignedIn}}">已签到</text>
+  <!-- 提示信息 -->
+  <view class="result-message" wx:if="{{showResultMessage}}">
+    <text>{{resultText}}</text>
+  </view>
+
+  <button class="weui-btn weui-btn_primary choose-location-btn" aria-role="button" bindtap="chooseLocation">
+    选择位置
+  </button>
+  
+  <button class="weui-btn weui-btn_primary get-location-btn" aria-role="button" bindtap="getLocation">
+    获取当前位置
+  </button>
+
+  <button class="weui-btn weui-btn_primary sign-in-btn" aria-role="button" url="javascript:" disabled="{{!(flag1&&flag2)}}" bindtap='sign'>
+    签到
+  </button>
+
+  <view class="motto">
+    <text>{{motto}}</text>
+  </view>
 </view>

@@ -12,7 +12,7 @@ App({
         // 用户已登录，可以在这里执行相关操作
         const userInfo = res.data;
         wx.redirectTo({
-          url: '/pages/profile/profile'
+          //url: '/pages/profile/profile'
         });
       },
       fail() {
@@ -31,6 +31,7 @@ App({
       }
     });
   wx.authorize({
+    
     scope: 'scope.userLocation',
     success() {
       // 用户允许获取位置

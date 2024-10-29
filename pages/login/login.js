@@ -24,6 +24,7 @@ Page({
         data: res.result.userInfo
       });
       wx.redirectTo({ url: '/pages/index/index' });
+      wx.showToast({ title: '登录成功', icon: 'none' });
     } else {
       wx.showToast({ title: '登录失败', icon: 'none' });
     }

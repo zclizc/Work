@@ -93,9 +93,9 @@ async function getUserInfo(username) {
 
 async function getCurrentUserInfo(username) {
   try {
-    if (!username) {
-      return { success: false, message: '用户名不能为空' };
-    }
+    // if (!username) {
+    //   return { success: false, message: '用户名不能为空' };
+    // }
 
     const user = await db.collection('userCollection').where({ username }).get();
     console.log('Current user retrieval result:', user);
@@ -113,9 +113,9 @@ async function getCurrentUserInfo(username) {
 // 新增的更新用户信息函数
 async function updateUserInfo(username, userInfo) {
   try {
-    if (!username) {
-      return { success: false, message: '用户名不能为空' };
-    }
+    // if (!username) {
+    //   return { success: false, message: '用户名不能为空' };
+    // }
 
     const res = await db.collection('userCollection').where({ username }).update({
       data: {
